@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reddipally Handloom Products</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Welcome to Reddipally Handloom Products</h1>
+
+    <h2>Contact Tailors' Head:</h2>
+    <p>Contact Number: 9849746499</p>
+
+    <h2>Available Products:</h2>
+    {% for product in products %}
+        <div class="product">
+            <img src="data:image/jpeg;base64,{{ product[1] }}" alt="{{ product[2] }}">
+            <p>{{ product[2] }}</p>
+            <p>Contact: {{ product[3] }}</p>
+        </div>
+    {% endfor %}
+
+    <div class="login-option">
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+
+</body>
+</html>

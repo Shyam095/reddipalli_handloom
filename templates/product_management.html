@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Management</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Product Management</h1>
+
+    <h2>Upload Product</h2>
+    <form method="POST" action="{{ url_for('product_management') }}" enctype="multipart/form-data">
+        <label for="image">Image</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <label for="description">Description</label>
+        <input type="text" id="description" name="description" required>
+        <label for="contact_number">Contact Number</label>
+        <input type="text" id="contact_number" name="contact_number" required>
+        <input type="submit" value="Upload">
+    </form>
+
+    <h2>Available Products:</h2>
+    {% for product in products %}
+        <div class="product">
+            <img src="data:image/jpeg;base64,{{ product[1] }}" alt="{{ product[2] }}">
+            <p>{{ product[2] }}</p>
+            <p>Contact: {{ product[3] }}</p>
+            <form method="POST" action="{{ url_for('delete_product', product_id=product[0]) }}">
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+    {% endfor %}
+
+    <div class="login-option">
+        <a href="{{ url_for('login') }}">Logout</a>
+    </div>
+
+</body>
+</html>
